@@ -1,0 +1,15 @@
+Test file for upload functionality
+Created: 2025-08-02T02:32:24.969Z
+
+This file tests the corrected upload path handling with the Git filing provider.
+
+The issue was:
+- Multer saves files with absolute paths
+- Git filing provider expects relative paths  
+- This caused path duplication in the form:
+  /temp-content/temp-content/filename
+
+The fix:
+- Convert absolute temp file paths to relative paths
+- Use path.relative(contentDir, tempFilePath)
+- This ensures proper path resolution
